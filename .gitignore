@@ -3,3 +3,4 @@ venv/
 .cursor/
 
 cursor.logs
+utils/__pycache__
