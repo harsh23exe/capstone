@@ -1,4 +1,7 @@
 {
     "model_name" : "hugohrban/progen2-small",
-    "window_size": 51
+    "window_size": 51,
+    "dataset_dir" : "datasets",
+    "ptm": "acet_k",
+    "emb_dir" :"embeddings"
 }
