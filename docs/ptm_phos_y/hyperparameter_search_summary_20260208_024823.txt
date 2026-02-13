@@ -1,0 +1,20 @@
+Hyperparameter Search Summary
+============================================================
+
+Timestamp: 20260208_024823
+Total configurations tested: 150
+Valid results: 150
+
+Best Configuration:
+  Hidden dims: (1024, 512)
+  Dropout: 0.2
+  Learning rate: 0.001
+  Batch size: 128
+
+Best Metrics:
+  best_val_auprc: 0.4902
+  test_precision: 0.3605
+  test_recall: 0.6360
+  test_f1: 0.4602
+  test_auprc: 0.4390
+  test_mcc: 0.3254

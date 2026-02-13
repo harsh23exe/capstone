@@ -1,0 +1,17 @@
+{
+  "timestamp": "20260207_235652",
+  "hidden_dims": [
+    1024,
+    512
+  ],
+  "dropout": 0.2,
+  "learning_rate": 0.001,
+  "batch_size": 128,
+  "metrics": {
+    "best_val_auprc": 0.49021964724770056,
+    "test_precision": 0.36051026067665004,
+    "test_recall": 0.6360078277886497,
+    "test_f1": 0.4601769911504425,
+    "test_auprc": 0.43899860957316894
+  }
+}

@@ -1,0 +1,14 @@
+phos - 0.35-0.40 formcc
+try acetylation
+extract frozen encoders embeddings
+
+related works: 
+one hot encoding
+PLM based feature representation
+LLM fine tuning approaches, parameter fine tuning approaches
+
+encoder only : ESM2
+encoder + decoder : PLM
+Decoder only : ProtGPT2
+
+decoder tokenization, eond of ptm motif
