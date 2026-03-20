@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  23 FEB 2026 14:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  26 FEB 2026 23:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -304,10 +304,15 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Underfull \hbox (badness 6493) in paragraph at lines 33--34
+[]\OT1/ptm/m/n/10 Post-translational mod-i-fi-ca-tions (PTMs) are chem-i-cal
+ []
 
 
-Underfull \hbox (badness 1629) in paragraph at lines 55--56
-\OT1/ptm/m/n/10 fixed win-dows around can-di-date residues. Clas-si-cal ML
+
+
+Underfull \hbox (badness 2418) in paragraph at lines 49--50
+[]\OT1/ptm/m/n/10 Supervised pre-dic-tors typ-i-cally rely on cu-rated PTM
  []
 
 
@@ -317,27 +322,19 @@ ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 76.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 63.
 
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 76.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 63.
 
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 1838) in paragraph at lines 89--90
-\OT1/ptm/m/n/10 [2], and PLMs such as ESM-2 and Prot-BERT ex-ploit
- []
-
-
-
-
-
-[2] (./conference_101719.bbl
+(./conference_101719.bbl
 
 )
 
@@ -353,33 +350,32 @@ Before submitting the final camera ready copy, remember to:
 
 
 
-[3
-
-] (./conference_101719.aux)
+[2] (./conference_101719.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4182 strings out of 473190
- 65611 string characters out of 5715801
- 473867 words of memory out of 5000000
- 27406 multiletter control sequences out of 15000+600000
+ 4174 strings out of 473190
+ 65486 string characters out of 5715801
+ 473843 words of memory out of 5000000
+ 27398 multiletter control sequences out of 15000+600000
  591039 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,8n,65p,801b,259s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,8n,65p,638b,259s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 ></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
 /usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></us
-r/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/te
-xlive/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/202
-5/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-di
-st/fonts/type1/urw/times/utmri8a.pfb>
-Output written on conference_101719.pdf (3 pages, 96773 bytes).
+r/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/tex
+live/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025
+/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dis
+t/fonts/type1/urw/times/utmri8a.pfb>
+Output written on conference_101719.pdf (2 pages, 99308 bytes).
 PDF statistics:
- 50 PDF objects out of 1000 (max. 8388607)
- 30 compressed objects within 1 object stream
+ 52 PDF objects out of 1000 (max. 8388607)
+ 31 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

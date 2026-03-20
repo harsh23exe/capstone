@@ -1,0 +1,91 @@
+Proposed IEEE Report Draft (Content)
+Title
+Protein PTM Site Prediction Using PTM-Mamba Embeddings and Hybrid CNN-RNN Classifiers
+
+Abstract
+Post-translational modification (PTM) site prediction is a core task in computational proteomics, where sequence context around candidate residues determines whether a modification is likely to occur. In this project, we develop a two-stage framework for binary PTM classification using fixed-length sequence windows. First, contextual protein representations are extracted from a pretrained PTM-Mamba model for each sample, producing a standardized 51×768 embedding per sequence window. Second, these embeddings are used to train hybrid deep classifiers based on convolutional and recurrent layers, specifically CNN+GRU and CNN+BiLSTM variants. A structured hyperparameter search is conducted over model family and layer depth. Experimental results on the acet_k dataset show that CNN+GRU achieves the strongest validation performance among tested configurations, with validation MCC around 0.52 and F1 around 0.75 in the best run. The study demonstrates that combining pretrained protein language model embeddings with lightweight sequence classifiers yields a stable and scalable PTM prediction pipeline suitable for extension across PTM types.
+
+Keywords
+Protein language models, PTM prediction, PTM-Mamba, CNN-GRU, BiLSTM, sequence classification, Matthews correlation coefficient
+
+1. Introduction
+Protein post-translational modifications regulate many biological processes and are often associated with protein function, localization, and disease mechanisms. Experimental PTM identification is accurate but expensive and time-consuming, motivating computational prediction approaches that prioritize likely modification sites from sequence context.
+
+In Milestone 1, we introduced protein sequence modeling, trained a baseline multilayer perceptron (MLP), and reviewed ProtMamba as a sequence representation model. In this milestone, we extend that foundation with a representation-learning-driven classification pipeline. Instead of training directly on raw one-hot or handcrafted features, we use PTM-Mamba embeddings as fixed input representations and focus model capacity on downstream classification. The project objective is to evaluate whether hybrid CNN-RNN architectures can effectively leverage these embeddings and identify a strong, stable model configuration for PTM site prediction.
+
+2. Related Approach and Rationale
+Recent protein language models provide contextual embeddings that encode local motifs and long-range sequence semantics. For PTM tasks, such embeddings can improve downstream classifiers by reducing dependence on manual feature engineering. CNN layers are well-suited for capturing short-range motif-like patterns, while recurrent layers (GRU/LSTM) capture sequential dependencies across windows. Therefore, a hybrid architecture is a natural choice for PTM binary classification on fixed-length context windows.
+
+MCC is selected as the primary model-selection metric because class distributions are mildly imbalanced, and MCC provides a balanced view of binary classification quality across true/false positives and negatives. F1 and AUROC are reported as complementary measures.
+
+3. Data and Preprocessing
+3.1 Dataset
+The milestone experiments use the acet_k PTM dataset with train/test CSV splits. Each sample contains:
+
+sequence window (Seq)
+binary label (Label)
+metadata (UniProtID, site position, and source sequence fields)
+3.2 Feature Extraction
+A pretrained PTM-Mamba model is used as a frozen encoder to generate hidden states from each input sequence window. Since sequence lengths can vary near termini, embeddings are normalized to a fixed shape:
+
+target feature shape: 51 × 768
+shorter sequences: zero-padded along sequence dimension
+longer sequences: truncated to length 51
+Each embedding is serialized and stored in compressed CSV format for efficient downstream training reuse. This decouples expensive encoder inference from classifier experiments and supports easy reuse across model variants.
+
+4. Methodology
+4.1 Classifier Architectures
+Two hybrid models are evaluated:
+
+CNN+GRU
+CNN+BiLSTM
+Common architecture pattern:
+
+input normalization (LayerNorm)
+stacked 1D convolution blocks over sequence dimension
+recurrent block (GRU or bidirectional LSTM)
+adaptive max pooling over temporal dimension
+MLP prediction head to binary logits
+4.2 Training Protocol
+stratified train/validation split from training set (85/15)
+weighted cross-entropy to address mild imbalance
+optimizer: AdamW
+validation metrics per epoch: Accuracy, Precision, Recall, F1, MCC, AUROC
+best checkpoint selected by validation MCC
+4.3 Hyperparameter Search
+Grid search dimensions:
+
+model type: {CNN+GRU, CNN+BiLSTM}
+number of conv layers: {1, 2, 3}
+number of recurrent layers: {1, 2, 3}
+Search jobs are executed through Slurm with GPU allocation, enabling reproducible multi-run experimentation.
+
+5. Results and Analysis
+5.1 Main Findings
+Hyperparameter experiments indicate that CNN+GRU with 2 convolution layers and 2 GRU layers provides the best validation behavior among tested configurations. This model achieved the strongest validation MCC (approximately 0.52 in the best run) and competitive F1 (approximately 0.75).
+
+5.2 Model Behavior
+shallow models converge quickly but underperform in MCC compared with mid-depth models
+very deep recurrent stacks (3 layers) frequently show unstable or collapsed behavior (near-random validation MCC)
+CNN+BiLSTM is competitive in several runs but does not consistently outperform the best CNN+GRU setting, while requiring higher computational overhead
+5.3 Interpretation
+The results suggest that moderate model depth is sufficient to capture useful PTM context from PTM-Mamba embeddings. GRU-based recurrent modeling offers a favorable tradeoff between performance and training stability for this dataset scale.
+
+6. Conclusion and Future Work
+This milestone established a complete PTM classification pipeline from pretrained embedding extraction to architecture search and model selection. The selected CNN+GRU configuration demonstrates that contextual protein embeddings combined with hybrid sequence modeling can produce robust validation performance for PTM site prediction.
+
+Immediate next steps include:
+
+evaluating the selected model on the held-out test split and reporting final metrics,
+extending experiments to additional PTM types,
+performing a second-stage hyperparameter refinement around the best architecture (learning rate, dropout, hidden size),
+adding calibration/error analysis to better characterize prediction confidence.
+Figure and Table Plan (for visual quality)
+Use these in your IEEE report for stronger presentation:
+
+Fig. 1: End-to-end pipeline (raw sequence -> PTM-Mamba -> 51×768 embedding -> classifier)
+Fig. 2: CNN+GRU / CNN+BiLSTM architecture schematic
+Fig. 3: Validation MCC by configuration (bar chart or heatmap)
+Fig. 4: Learning curves (train loss + validation MCC/F1 for top models)
+Table I: Dataset split statistics and class distribution
+Table II: Best validation metrics for top configurations

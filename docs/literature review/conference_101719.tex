@@ -1,0 +1,70 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Post-Translational Modification Prediction with ProtMamba}
+
+\author{\IEEEauthorblockN{Harsh Chauhan}
+\IEEEauthorblockA{M.S. in Computer Science (Student)\\
+Rochester Institute of Technology (RIT)\\
+hc3725@g.rit.edu}
+}
+
+\maketitle
+
+\begin{abstract}
+We present a PTM prediction pipeline centered on PTM-Mamba/ProtMamba that is designed to work well on long protein sequences. The key idea is to avoid the steep compute cost of Transformer attention on long inputs, while still using rich pretrained representations. Our core contribution is a practical feature design that combines contextual residue embeddings from an encoder model (ESM-2) with complementary features from a decoder-only protein language model (e.g., ProGen or ProtGPT2), supporting fast, long-range PTM prediction at scale.
+\end{abstract}
+
+\begin{IEEEkeywords}
+post-translational modification, deep learning, protein language models, proteomics, bioinformatics
+\end{IEEEkeywords}
+
+\section{Introduction}
+Post-translational modifications (PTMs) are chemical changes that cells add to proteins to control when and how those proteins act \cite{zhong2023ptm}. In PTM site prediction, the goal is to take a protein sequence and estimate which residues are likely to be modified \cite{li2022dbptm}. This matters because experimentally mapping PTMs at large scale is difficult and can be incomplete.
+
+Mass spectrometry (MS) is the standard tool for finding PTMs, but it has practical limits in coverage and site localization, especially across many proteins and conditions \cite{messner2023mass}. This motivates machine learning (ML) methods that can quickly score candidate sites and help prioritize what to validate in the lab.
+
+Recent predictors increasingly reuse pretrained protein language models (PLMs), which provide informative sequence representations learned from large protein databases \cite{elnaggar2021prottranscrackinglanguagelifes,elnaggar2020,lin2022}. At the same time, modeling very long proteins efficiently remains challenging for many attention-based architectures, motivating approaches such as PTM-Mamba that are designed for long-context inference \cite{peng2024ptm}.
+
+\section{Literature Review}
+PTM site prediction has developed in a chronological progression from wet-lab discovery constraints, to feature-engineered machine learning, to transfer learning with pretrained protein language models (PLMs), and most recently to architectures designed for efficient long-context sequence modeling. Here, we structure the review to reflect this trajectory and motivate PTM-Mamba/ProtMamba as an efficient alternative for long proteins.
+
+% Suggested Figure: Timeline of PTM prediction (MS constraints -> engineered features -> deep/windowed models -> PLM embeddings -> decoder-only priors -> efficient long-context models)
+% What it shows: Key method families and the scaling constraint that motivates PTM-Mamba.
+% Place it: After this opening paragraph.
+
+\subsection{Why ML-Based Prediction Complements Wet-Lab PTM Mapping}
+PTMs are covalent modifications to proteins that regulate activity and signaling \cite{zhong2023ptm}. Experimentally, mass spectrometry (MS) is the dominant high-throughput approach for identifying modified peptides and localizing sites, but practical limitations remain: PTMs can be transient or low-stoichiometry, enrichment can bias coverage, and fragmentation can yield ambiguous site localization \cite{messner2023mass}. These constraints make ML-based predictors useful for scalable residue-level scoring, prioritizing candidates for targeted assays, and enabling proteome-scale screening.
+
+Supervised predictors typically rely on curated PTM databases (e.g., dbPTM) \cite{li2022dbptm}. Because many negatives are operational (``not observed'' under measured conditions), robust modeling must tolerate label noise and distribution shift.
+
+\subsection{Early PTM Predictors: One-Hot and Physico-Chemical Feature Engineering}
+Early computational approaches encoded fixed windows around candidate residues using one-hot representations and hand-designed descriptors such as physico-chemical properties and evolutionary profiles, then trained classical classifiers. These pipelines were interpretable and computationally light, but they hard-coded locality through the window and depended strongly on feature design.
+
+As datasets grew, deep learning began to replace manual feature construction with learned representations, still often in windowed form. Examples include deep architectures for phosphorylation and other PTMs \cite{wang2017musitedeep,fu2019deepubi}, illustrating a broader shift from engineered inputs toward end-to-end sequence-derived features.
+
+\subsection{Shift to Feature Representations from Pretrained PLMs}
+The next inflection point was transfer learning from PLMs: models pretrained on large unlabeled protein corpora provide contextual residue embeddings that can be reused for downstream prediction \cite{elnaggar2020,elnaggar2021prottranscrackinglanguagelifes}. Transformer-based PLMs derive these representations via attention mechanisms \cite{vaswani2017attention}. In practice, PTM predictors often extract per-residue embeddings from an encoder PLM (e.g., ESM-2) and train a lightweight classifier for residue-level PTM propensity \cite{lin2022,rives2021scaling}.
+
+\subsection{From Encoder-Centric PTM Detection Toward Decoder-Only Priors}
+Most PTM detectors initially favored encoder-style PLMs because bidirectional context yields direct per-residue representations for classification. However, protein modeling has increasingly incorporated decoder-only (autoregressive) PLMs, which learn strong sequence priors for generation and design. ProtGPT2 and ProGen are representative decoder-only protein LMs \cite{ferruz2022protgpt2,madani2020progen}. While not designed specifically for PTM detection, decoder-only features can complement encoder embeddings by capturing global sequence plausibility and long-range regularities.
+
+\subsection{Transformer Limits on Long Proteins and Why PTM-Mamba/ProtMamba Fits}
+Despite strong accuracy, Transformers have a key scaling limitation: dense self-attention incurs $\mathcal{O}(N^2)$ time and memory in sequence length $N$ \cite{vaswani2017attention}, which constrains throughput and context length for long proteins. This motivates architectures with near-linear scaling that can still propagate information across long ranges.
+
+State-space sequence models provide one such route to long-context learning with favorable scaling, as developed in long-sequence modeling work such as HiPPO and S4 \cite{gu2020hippo,gu2022s4}. PTM-Mamba adapts Mamba-style selective state-space modeling toward PTM-aware protein representation, aiming to preserve global context while enabling efficient long-protein inference \cite{peng2024ptm}. This makes PTM-Mamba/ProtMamba a suitable backbone for PTM prediction when long-range dependencies and computational efficiency are both central requirements.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

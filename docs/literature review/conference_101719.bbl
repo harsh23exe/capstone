@@ -21,25 +21,6 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{peng2024ptm}
-Z.~Peng, ``Ptm-mamba: a ptm-aware protein language model with bidirectional
-  gated mamba blocks,'' in \emph{Proceedings of the 33rd ACM International
-  Conference on Information and Knowledge Management}, 2024, pp. 5475--5478.
-
-\bibitem{vaswani2017attention}
-A.~Vaswani, N.~Shazeer, N.~Parmar, J.~Uszkoreit, L.~Jones, A.~N. Gomez,
-  L.~Kaiser, and I.~Polosukhin, ``Attention is all you need,'' in
-  \emph{Advances in Neural Information Processing Systems}, 2017.
-
-\bibitem{lin2022}
-Z.~Lin \emph{et~al.}, ``Esm-2: Protein sequence embeddings for downstream
-  analysis,'' \emph{Nature Communications}, vol.~13, pp. 1--9, 2022.
-
-\bibitem{madani2020progen}
-A.~Madani, B.~McCann, N.~Naik, N.~S. Keskar, N.~Anand, R.~R. Eguchi, P.-S.
-  Huang, and R.~Socher, ``Progen: Language modeling for protein generation,''
-  \emph{arXiv preprint arXiv:2004.03497}, 2020.
-
 \bibitem{zhong2023ptm}
 Q.~Zhong, X.~Xiao, Y.~Qiu, Z.~Xu, C.~Chen, B.~Chong, X.~Zhao, S.~Hai, S.~Li,
   Z.~An, and L.~Dai, ``Protein posttranslational modifications in health and
@@ -73,15 +54,14 @@ A.~Elnaggar \emph{et~al.}, ``Protbert: A pretrained deep learning model for
   protein sequence representation,'' \emph{Bioinformatics}, vol.~36, no.~7, pp.
   2099--2108, 2020.
 
-\bibitem{cheng2023research}
-X.~Cheng, K.~Wang, Y.~Zhao, and K.~Wang, ``Research progress on
-  post-translational modification of proteins and cardiovascular diseases,''
-  \emph{Cell Death Discovery}, vol.~9, no.~1, p. 275, 2023.
+\bibitem{lin2022}
+Z.~Lin \emph{et~al.}, ``Esm-2: Protein sequence embeddings for downstream
+  analysis,'' \emph{Nature Communications}, vol.~13, pp. 1--9, 2022.
 
-\bibitem{shrestha2024post}
-P.~Shrestha, J.~Kandel, H.~Tayara, and K.~T. Chong, ``Post-translational
-  modification prediction via prompt-based fine-tuning of a gpt-2 model,''
-  \emph{Nature Communications}, vol.~15, no.~1, p. 6699, 2024.
+\bibitem{peng2024ptm}
+Z.~Peng, ``Ptm-mamba: a ptm-aware protein language model with bidirectional
+  gated mamba blocks,'' in \emph{Proceedings of the 33rd ACM International
+  Conference on Information and Knowledge Management}, 2024, pp. 5475--5478.
 
 \bibitem{wang2017musitedeep}
 D.~Wang, S.~Zeng, C.~Xu, W.~Qiu, Y.~Liang, and T.~Joshi, ``Musitedeep: a
@@ -93,17 +73,17 @@ H.~Fu, Y.~Yang, X.~Wang, H.~Wang, and Y.~Xu, ``Deepubi: a deep learning
   framework for prediction of ubiquitination sites in proteins,'' \emph{BMC
   Bioinformatics}, vol.~20, no.~1, 2019.
 
+\bibitem{vaswani2017attention}
+A.~Vaswani, N.~Shazeer, N.~Parmar, J.~Uszkoreit, L.~Jones, A.~N. Gomez,
+  L.~Kaiser, and I.~Polosukhin, ``Attention is all you need,'' in
+  \emph{Advances in Neural Information Processing Systems}, 2017.
+
 \bibitem{rives2021scaling}
 A.~Rives, J.~Meier, T.~Sercu, S.~Goyal, Z.~Lin, J.~Liu, D.~Guo, M.~Ott, C.~L.
   Zitnick, J.~Ma, and R.~Fergus, ``Biological structure and function emerge
   from scaling unsupervised learning to 250 million protein sequences,''
   \emph{Proceedings of the National Academy of Sciences}, vol. 118, no.~15,
   2021.
-
-\bibitem{elnaggar2023}
-A.~Elnaggar \emph{et~al.}, ``Ankh: A transformer-based protein language model
-  for molecular interaction prediction,'' \emph{Cell}, vol. 184, pp.
-  3712--3725, 2023.
 
 \bibitem{ferruz2022protgpt2}
 \BIBentryALTinterwordspacing
@@ -113,23 +93,10 @@ N.~Ferruz, S.~Schmidt, and B.~Höcker, ``Protgpt2 is a deep unsupervised
   \url{https://doi.org/10.1038/s41467-022-32007-7}
 \BIBentrySTDinterwordspacing
 
-\bibitem{pratyush2024lmcrot}
-P.~Pratyush, S.~Bahmani, S.~Pokharel, H.~D. Ismail, and D.~B. Kc, ``Lmcrot: an
-  enhanced protein crotonylation site predictor by leveraging an interpretable
-  window-level embedding from a transformer-based protein language model,''
-  \emph{Bioinformatics}, vol.~40, no.~5, p. btae290, 2024.
-
-\bibitem{jumper2021highly}
-J.~Jumper, R.~Evans, A.~Pritzel, T.~Green, M.~Figurnov, O.~Ronneberger,
-  K.~Tunyasuvunakool, R.~Bates, A.~{\v{Z}}{\'\i}dek, A.~Potapenko
-  \emph{et~al.}, ``Highly accurate protein structure prediction with
-  alphafold,'' \emph{nature}, vol. 596, no. 7873, pp. 583--589, 2021.
-
-\bibitem{zaheer2020bigbird}
-M.~Zaheer, G.~Guruganesh, A.~Dubey, J.~Ainslie, C.~Alberti, S.~Onta\~{n}\'{o}n,
-  P.~Pham, A.~Ravula, Q.~Wang, L.~Yang, and A.~Ahmed, ``Big bird: Transformers
-  for longer sequences,'' in \emph{Advances in Neural Information Processing
-  Systems}, 2020.
+\bibitem{madani2020progen}
+A.~Madani, B.~McCann, N.~Naik, N.~S. Keskar, N.~Anand, R.~R. Eguchi, P.-S.
+  Huang, and R.~Socher, ``Progen: Language modeling for protein generation,''
+  \emph{arXiv preprint arXiv:2004.03497}, 2020.
 
 \bibitem{gu2020hippo}
 A.~Gu, K.~Goel, and C.~R{\'e}, ``Hippo: Recurrent memory with optimal
