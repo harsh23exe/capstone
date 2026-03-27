@@ -4,3 +4,6 @@ venv/
 
 cursor.logs
 utils/__pycache__
+
+# Office / presentations
+*.pptx
