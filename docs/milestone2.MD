@@ -69,6 +69,21 @@
     - Slightly better validation MCC and F1.
     - Lower computational cost (unidirectional GRU vs. bidirectional LSTM) for the same number of layers, which is important when scaling to more PTM types.
 
+### CNN+GRU results across PTMs
+
+Using the selected CNN+GRU approach, we also recorded downstream evaluation metrics across multiple PTM types. Reported metrics are **MCC**, **F1**, **recall**, and **accuracy** (as provided).
+
+| PTM | MCC | F1 | Recall | Accuracy |
+|---|---:|---:|---:|---:|
+| `acet_k` | 0.501944 | 0.738904 | 0.773514 | 0.751553 |
+| `met_r` | 0.487541 | 0.576192 | 0.621517 | 0.857526 |
+| `phos_y` | 0.444938 | 0.534024 | 0.627967 | 0.846861 |
+| `sumo_k` | 0.471753 | 0.736490 | 1.000000 | 0.735678 |
+
+Notes:
+- `sumo_k` achieves perfect recall at the reported operating point, which typically implies a precision trade-off (not shown here).
+- The relative ranking differs a bit by metric (e.g., `met_r` has high accuracy but lower F1), so MCC/F1 are usually better “single-number” summaries under imbalance.
+
 - **Next steps (optional)**:
   - Evaluate the selected CNN+GRU (2 conv, 2 GRU layers) on the held-out **test set** using `eval_classifier.py` to report test MCC, F1, AUROC, precision, and recall.
   - Consider a narrower second-stage search around the best region (e.g., tuning hidden size, dropout, learning rate) once the architecture choice is fixed.

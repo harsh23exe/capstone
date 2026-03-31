@@ -1,6 +1,8 @@
-## Pipeline Iteration 1 – Phosphorylation (phos_y) Baseline
+## Pipeline Iteration 1 – Baseline MLP (phos_y deep dive + all-PTM summary)
 
-This document summarizes the first end-to-end baseline pipeline for phosphorylation (tyrosine) PTM site prediction, implemented in `src/simple_pipeline.ipynb`. The goal for this iteration was to validate the data pipeline, establish a reasonable MLP baseline, and understand how far simple window-based features can go on the phos_y task.
+This document summarizes the first end-to-end baseline pipeline for PTM site prediction using a simple MLP (implemented in `src/simple_pipeline.ipynb`). The core goal for this iteration was to validate the data pipeline, establish a reasonable MLP baseline, and understand how far simple window-based features can go.
+
+The main narrative below focuses on **phosphorylation (tyrosine), `phos_y`**, and at the end we include a concise **results summary across all PTMs** we ran through the same pipeline + hyperparameter search.
 
 ---
 
@@ -243,4 +245,35 @@ A few directions that naturally follow from this baseline:
   - Stratified analysis across different sequence complexity or cluster labels.
 
 These steps will build directly on the current notebook and use this iteration’s metrics as the baseline to beat.
+
+---
+
+## Results summary – best MLP per PTM
+
+In addition to the `phos_y` baseline above, we ran the same MLP pipeline + hyperparameter search for the other PTMs in the project. Below are the **best configurations (selected by validation AUPRC)** and their corresponding **held-out test** metrics.
+
+Source of truth for these values: `docs/ptm_*/best_mlp_config_*.json`.
+
+### Best metrics (val selection, test evaluation)
+
+| PTM | Best val AUPRC | Test AUPRC | Test F1 | Precision | Recall | MCC |
+|---|---:|---:|---:|---:|---:|---:|
+| `acet_k` | 0.7721 | 0.7497 | 0.7026 | 0.6866 | 0.7193 | 0.3782 |
+| `gly_n` | 0.9822 | 0.9790 | 0.9716 | 0.9500 | 0.9942 | 0.9421 |
+| `phos_y` | 0.4902 | 0.4390 | 0.4602 | 0.3605 | 0.6360 | 0.3254 |
+| `sumo_k` | 0.7480 | 0.6836 | 0.6567 | 0.6180 | 0.7005 | 0.3723 |
+
+### Best configurations (hyperparameters)
+
+| PTM | Hidden dims | Dropout | Learning rate | Batch size | Run timestamp |
+|---|---|---:|---:|---:|---|
+| `acet_k` | (1024, 512) | 0.5 | 5e-4 | 512 | `20260208_013517` |
+| `gly_n` | (512, 256, 128) | 0.3 | 1e-3 | 128 | `20260208_015008` |
+| `phos_y` | (1024, 512) | 0.2 | 1e-3 | 128 | `20260208_024823` |
+| `sumo_k` | (1024, 512) | 0.5 | 1e-4 | 256 | `20260208_035950` |
+
+### High-level takeaway
+
+- Difficulty varies substantially by PTM under this fixed-window + MLP setup: `gly_n` is near-separable with this representation, while `phos_y` remains challenging (lower AUPRC and lower precision at comparable recall).
+- `acet_k` and `sumo_k` land in a similar mid-range regime, indicating the pipeline is generally strong but still leaves headroom for representation/model upgrades.
 
